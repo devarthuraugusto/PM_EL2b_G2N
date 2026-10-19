@@ -52,13 +52,19 @@ public class MeiaEntrada extends Ingresso {
 		super(filme, sessao);	
 	}
 
-	/**
-	 * Calcula o valor total do ingresso de meia-entrada
-	 * @return valor final do ingresso de meia-entrada
-	 */
 	@Override 
-	public double valorIngresso() {
-		//TODO
-		return  0;
+	protected double valorAdicionais(){
+		double soma = 0;
+		for(EAdicional adicional : adicionais){
+			soma += adicional.valor();
+		}
+		return soma;
 	}
+
+	@Override 
+	protected double valorEntradaReal(){
+		return VALOR_ENTRADA * DESCONTO_MEIA;
+	}
+	
+	
 }

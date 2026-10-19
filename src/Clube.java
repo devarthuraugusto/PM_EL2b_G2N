@@ -42,6 +42,7 @@ public class Clube extends Ingresso {
 	 */
 	private EClube categoria;
 
+
 	/**
 	 * Cria um ingresso de clube para o filme e sessão informados.
 	 *
@@ -49,17 +50,31 @@ public class Clube extends Ingresso {
 	 * @param sessao data e hora da sessão
 	 * @param clube categoria do clube utilizada para definir os descontos
 	 */
-	public Clube(String filme, LocalDateTime sessao, EClube clube) {
-		//TODO
+	public Clube(String filme, LocalDateTime sessao, EClube categoria) {
+		super(filme, sessao);
+		this.categoria = categoria;
+		
+		if(categoria == null){
+			this.categoria = EClube.PIPOCA;
+		}
+
 	}
 
 	/**
-	 * Calcula o valor total do ingresso para cliente do clube.
-	 * @return valor final do ingresso com descontos do clube
-	 */
-	@Override 
-	public double valorIngresso() {
-		//TODO
-		return  0;
+	* @return o valor da entrada calcualdo 
+	*/
+	protected double valorEntradaReal(){
+		return VALOR_ENTRADA * categoria.descontoEntrada();
 	}
+	/**
+	* @return o valor dos adicionais calculado 
+	*/
+	protected double valorAdicionais(){
+		double soma = 0;
+		for (EAdicional adicional : adicionais) {
+			soma += adicional.valor() * categoria.descontoAdicionais();
+		}
+		return soma;
+	}
+
 }

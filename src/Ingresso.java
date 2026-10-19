@@ -59,7 +59,7 @@ public abstract class Ingresso {
 	/**
 	 * Lista de adicionais vinculados ao ingresso.
 	 */
-	private List<EAdicional> adicionais;
+	protected  List<EAdicional> adicionais;
 
 	/**
 	 * Constrói um ingresso com filme e sessão.
@@ -101,13 +101,24 @@ public abstract class Ingresso {
 
 	}
 
+	protected abstract double valorEntradaReal();
+
+	protected abstract double valorAdicionais();
+
+	private String cabecalho(){
+		return "SUMÁRIO TICKET\n***************";
+	}
+
 	/**
 	 * Calcula o valor total do ingresso, considerando as regras do tipo concreto
 	 * (regular, meia-entrada ou clube) e as regras do problema.
 	 *
 	 * @return valor final do ingresso
 	 */
-	public abstract double valorIngresso();
+	public double valorIngresso(){
+		return valorEntradaReal() + valorAdicionais();
+	}
+	
 
 	/**
 	 * Gera a representação textual (cupom) do ingresso.
@@ -118,7 +129,11 @@ public abstract class Ingresso {
 	 */
 	@Override 
 	public String toString() {
-		//TODO
-		return "";
+		IO.println(cabecalho());
+		StringBuilder sb = new StringBuilder();
+        sb.append("Filme: ").append(filme);
+		sb.append("Sessao: ").append(sessao);
+		sb.append(valorIngresso());
+        return sb.toString();
 	}
 }

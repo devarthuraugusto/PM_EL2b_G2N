@@ -47,12 +47,18 @@ public class Regular extends Ingresso {
 		super(filme, sessao);
 	}
 
-	/**
-	 * Calcula o valor total de um ingresso regular.
-	 * @return valor final do ingresso regular
-	 */
-	public double valorIngresso() {
-		//TODO
-		return  0;
+	@Override 
+	protected final double valorAdicionais(){
+		double soma = 0;
+		for (EAdicional adicional : adicionais) {
+			soma += adicional.valor();
+		}
+		return soma;
 	}
+	
+	@Override 
+	protected double valorEntradaReal(){
+		return VALOR_ENTRADA;
+	}
+
 }

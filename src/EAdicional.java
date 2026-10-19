@@ -37,7 +37,7 @@ public enum EAdicional {
 	REFRIGERANTE(10),
 	BALDE_ESPECIAL(20);
 
-	private double valor;
+	private  double valor;
 
 	EAdicional(double preco){
 		valor = preco;
